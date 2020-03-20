@@ -1,0 +1,28 @@
+button,
+.button {
+  text-align: center;
+  padding: 1em 2em;
+  color: $light-color;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: $font-stack;
+  border: none;
+}
+
+.primary-button {
+  background-color: $primary-color;
+}
+
+.secondary-button {
+  background-color: $secondary-color;
+}
+
+.primary-button:hover {
+  background-color: $primary-highlight;
+}
+
+.secondary-button:hover {
+  background-color: $secondary-highlight;
+}

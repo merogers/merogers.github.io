@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap");
+
+// Variables
+
+$font-stack: "Montserrat", sans-serif;
+$dark-color: #262429;
+$medium-color: #5d4a82;
+$light-color: #ffffff;
+
+$primary-color: #8560d4;
+// $primary-color: #a585e5;
+$secondary-color: #262429;
+// $secondary-color: #65baa9;
+
+$primary-highlight: #a585e5;
+$secondary-highlight: #4b4750;
+
+$tagline-color: #aaaaaa;
+
+$highlight-color: #b89cf1;
+
+// Mixins
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Global Styles
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100vh;
+  font-family: $font-stack;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+p {
+  margin: 1em 0;
+  line-height: 1.4em;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.align-left {
+  margin-left: auto;
+}
+
+.align-right {
+  margin-left: auto;
+}
+
+.align-center {
+  margin: 0px auto;
+}
+
+.border {
+  border: solid 1px #cccccc;
+}
+
+.text-center {
+  text-align: center;
+}
+
+// Margins and Padding
+
+$rems: (1, 2, 3, 4, 5);
+
+@each $rem in $rems {
+  .m-#{$rem} {
+    margin: #{$rem}rem;
+  }
+  .my-#{$rem} {
+    margin: #{$rem}rem 0;
+  }
+  .mx-#{$rem} {
+    margin: 0 #{$rem}rem;
+  }
+
+  .p-#{$rem} {
+    padding: #{$rem}rem;
+  }
+  .py-#{$rem} {
+    padding: #{$rem}rem 0;
+  }
+  .px-#{$rem} {
+    padding: 0 #{$rem}rem;
+  }
+}

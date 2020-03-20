@@ -1,0 +1,115 @@
+#mobile-menu {
+  div {
+    height: 2px;
+    width: 30px;
+    background-color: $light-color;
+    margin: 5px;
+  }
+}
+
+nav {
+  @include flex-row;
+  li {
+    display: inline-block;
+  }
+  a {
+    color: $light-color;
+    display: block;
+    transition: color 0.2s ease-out;
+  }
+  a:hover {
+    color: $highlight-color;
+  }
+}
+
+.open {
+  left: 0 !important;
+  transition: left 0.2s ease-out;
+}
+
+// Medium Screens
+
+@media only screen and (max-width: 1000px) {
+  .showcase {
+    @include flex-column;
+  }
+  .buttons {
+    @include flex-column;
+    a,
+    button {
+      width: 100%;
+    }
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1001px) {
+  .showcase {
+    @include flex-row;
+  }
+  .card {
+    width: 50%;
+  }
+}
+
+// Small Screens
+
+@media only screen and (max-width: 700px) {
+  #mobile-menu {
+    display: inline-block;
+    cursor: pointer;
+  }
+  #mobile-menu:hover {
+    div {
+      background-color: $highlight-color;
+    }
+  }
+  #desktop-menu {
+    position: fixed;
+    left: 100%;
+    top: 8vh;
+    @include flex-column;
+    background-color: $dark-color;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    a {
+      padding: 2em;
+    }
+    height: 50vh;
+    transition: left 0.2s ease-out;
+  }
+  .hero-image {
+    display: none;
+  }
+  .card {
+    width: 100%;
+  }
+  a:last-child {
+    margin-top: 2em;
+  }
+}
+
+@media only screen and (min-width: 701px) {
+  #mobile-menu {
+    display: none;
+  }
+  #desktop-menu {
+    @include flex-row;
+    a {
+      padding: 0em 1em;
+    }
+  }
+  .buttons {
+    button,
+    a {
+      width: 100%;
+    }
+    @include flex-row;
+    justify-content: space-between;
+    width: 100%;
+    a:last-child {
+      margin-left: 2em;
+    }
+  }
+}
