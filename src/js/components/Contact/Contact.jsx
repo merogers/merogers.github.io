@@ -57,14 +57,15 @@ const Contact = ({ title }) => {
     <div id="contact">
       <h2 className="text-center">{title}</h2>
       <form id="contact-form" onSubmit={handleSubmit}>
+        <input type="hidden" name="form-name" value="contact" />
         <label htmlFor="name">
           <div>
             Name:
             {nameError ? (
               <span className="error-message">{nameError}</span>
             ) : (
-              <span />
-            )}
+                <span />
+              )}
           </div>
           <input
             type="text"
@@ -80,8 +81,8 @@ const Contact = ({ title }) => {
             {emailError ? (
               <span className="error-message">{emailError}</span>
             ) : (
-              <span />
-            )}
+                <span />
+              )}
           </div>
           <input
             type="email"
@@ -98,8 +99,8 @@ const Contact = ({ title }) => {
             {messageError ? (
               <span className="error-message">{messageError}</span>
             ) : (
-              <span />
-            )}
+                <span />
+              )}
           </div>
           <textarea
             type="textarea"
@@ -112,21 +113,21 @@ const Contact = ({ title }) => {
         {submitted ? (
           <div className="success">Submitted Successfully</div>
         ) : (
-          <button type="submit" className="button primary-button">
-            Submit
-          </button>
-        )}
+            <button type="submit" className="button primary-button">
+              Submit
+            </button>
+          )}
       </form>
     </div>
   ) : (
-    <div id="contact">
-      <h2 className="text-center">Error</h2>
-      <p>
-        Sorry, there was an error sending your request. Please refresh the page
-        and try again.
+      <div id="contact">
+        <h2 className="text-center">Error</h2>
+        <p>
+          Sorry, there was an error sending your request. Please refresh the page
+          and try again.
       </p>
-    </div>
-  );
+      </div>
+    );
 };
 
 Contact.propTypes = {

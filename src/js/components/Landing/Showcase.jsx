@@ -54,7 +54,7 @@ Showcase.propTypes = {
 
 Showcase.defaultProps = {
   header: "Michelle Rogers",
-  tagline: "Web Developer and IT Consultant",
+  tagline: "Web Developer and IT Technician",
   paragraph1:
     "As a web developer (focusing on front-end) I have experience with HTML5, CSS3, JavaScript, React, Git, WordPress and many other web technologies. Feel free to browse my portfolio of new development projects.",
   paragraph2:

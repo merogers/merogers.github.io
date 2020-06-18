@@ -39,7 +39,7 @@
   min-height: 100vh;
 }
 
-form {
+#contact-form {
   @include flex-column;
   width: 300px;
   margin: 0px auto;
