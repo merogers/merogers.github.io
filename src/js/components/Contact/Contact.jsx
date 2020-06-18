@@ -36,7 +36,6 @@ const Contact = ({ title }) => {
   };
 
   const handleSubmit = event => {
-    event.preventDefault();
     const isInputValid = validateInput();
     if (isInputValid) {
       setSubmitted(true);
@@ -51,6 +50,7 @@ const Contact = ({ title }) => {
     } else {
       setSubmitted(false);
     }
+    event.preventDefault();
   };
 
   return !submitError ? (
