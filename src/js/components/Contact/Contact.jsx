@@ -56,7 +56,13 @@ const Contact = ({ title }) => {
   return !submitError ? (
     <div id="contact">
       <h2 className="text-center">{title}</h2>
-      <form id="contact-form" name="contact-form" onSubmit={handleSubmit}>
+      <form
+        id="contact-form"
+        name="contact-form"
+        method="post"
+        data-netlify-honeypot="bot-field"
+        onSubmit={handleSubmit}
+      >
         <input type="hidden" name="form-name" value="contact-form" />
         <label htmlFor="name">
           <div>
