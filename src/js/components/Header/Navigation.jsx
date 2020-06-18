@@ -1,15 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { Link } from "react-scroll";
 
 const Navigation = () => {
-  const mobileMenu = () => {
-    const menu = document.getElementById("desktop-menu");
-    if (menu) {
-      menu.classList.toggle("open");
-    }
-  };
+  const [open, setOpen] = useState(false);
   const navLinks = [
     {
       id: 1,
@@ -30,7 +25,7 @@ const Navigation = () => {
 
   return (
     <nav>
-      <ul id="desktop-menu">
+      <ul id="desktop-menu" className={open ? "open" : " "}>
         {navLinks.map(({ id, linkText, linkTo }) => (
           <li key={id}>
             <Link
@@ -48,8 +43,8 @@ const Navigation = () => {
       </ul>
       <div
         id="mobile-menu"
-        onClick={mobileMenu}
-        onKeyPress={mobileMenu}
+        onClick={() => setOpen(!open)}
+        onKeyPress={() => setOpen(!open)}
         role="button"
         tabIndex="-1"
       >

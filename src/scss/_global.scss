@@ -8,16 +8,19 @@ $medium-color: #5d4a82;
 $light-color: #ffffff;
 
 $primary-color: #8560d4;
-// $primary-color: #a585e5;
 $secondary-color: #262429;
-// $secondary-color: #65baa9;
 
 $primary-highlight: #a585e5;
 $secondary-highlight: #4b4750;
 
-$tagline-color: #aaaaaa;
+$grey-light: #eeeeee;
+$grey-medium: #cccccc;
+$grey-dark: #888888;
 
 $highlight-color: #b89cf1;
+
+$error-color: red;
+$success-color: green;
 
 // Mixins
 
@@ -48,8 +51,8 @@ $highlight-color: #b89cf1;
 html,
 body,
 #root {
-  height: 100vh;
   font-family: $font-stack;
+  min-height: 100vh;
 }
 
 a {
@@ -84,7 +87,7 @@ ul {
 }
 
 .border {
-  border: solid 1px #cccccc;
+  border: solid 1px $grey-medium;
 }
 
 .text-center {

@@ -38,7 +38,7 @@ Footer.propTypes = {
 // Default Prop Strings for Portfolio
 
 Footer.defaultProps = {
-  site: "Copyright Message"
+  site: "merogers.dev"
 };
 
 export default Footer;

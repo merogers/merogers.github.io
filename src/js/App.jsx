@@ -14,9 +14,9 @@ const App = () => {
       <Header />
       <Landing />
       <Portfolio title="Recent Projects" />
-      <About title="About Me" />
-      <Contact title="Contact" />
-      <Footer site="merogers.dev" />
+      <About />
+      <Contact />
+      <Footer />
     </div>
   );
 };

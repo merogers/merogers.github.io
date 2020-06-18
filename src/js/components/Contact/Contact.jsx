@@ -1,164 +1,133 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const encode = data => {
-  return Object.keys(data)
-    .map(key => `${encodeURIComponent(key)} = ${encodeURIComponent(data[key])}`)
-    .join("&");
-};
+const Contact = ({ title }) => {
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [messageError, setMessageError] = useState("");
 
-const initialState = {
-  name: "",
-  email: "",
-  message: "",
-  nameError: "",
-  emailError: "",
-  messageError: "",
-  submitted: false,
-  fetchError: false
-};
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
-export default class Contact extends Component {
-  constructor(props) {
-    super(props);
-    this.state = initialState;
-  }
-
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  validate = () => {
-    const { name, email, message } = this.state;
-
-    if (name && name.length >= 5) {
-      this.setState({ nameError: "" });
-    }
-    if (email && email.length >= 5 && email.includes("@")) {
-      this.setState({ emailError: "" });
-    }
-    if (message && message.length >= 5) {
-      this.setState({ messageError: "" });
-    }
-
+  const validateInput = () => {
+    if (name && name.length >= 5) setNameError("");
+    if (email && email.length >= 5 && email.includes("@")) setEmailError("");
+    if (message && message.length >= 5) setMessageError("");
     if (name.length < 5 || email.length < 5 || message.length < 5) {
-      if (!name || name.length < 5) {
-        this.setState({ nameError: "(Name too short)" });
-      }
-      if (!email || email.length < 5) {
-        this.setState({ emailError: "(Email too short or invalid)" });
-      }
-      if (!message || message.length < 5) {
-        this.setState({ messageError: "(Message too short)" });
-      }
+      if (!name || name.length < 5) setNameError("(Name too short)");
+      if (!email || email.length < 5)
+        setEmailError("(Email too short or invalid)");
+      if (!message || message.length < 5)
+        setMessageError("(Message too short)");
       return false;
     }
     return true;
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const isValid = this.validate();
-    if (isValid) {
+  const encode = data => {
+    return Object.keys(data)
+      .map(
+        key => `${encodeURIComponent(key)} = ${encodeURIComponent(data[key])}`
+      )
+      .join("&");
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    const isInputValid = validateInput();
+    if (isInputValid) {
+      setSubmitted(true);
+      const submission = { name, email, message };
       fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ "form-name": "contact-form", ...this.state })
+        body: encode({ "form-name": "contact-form", submission })
       })
-        .then(() => this.setState({ submitted: "true" }))
-        .catch(() => this.setState({ fetchError: "true" }));
+        .then(() => setSubmitted(true))
+        .catch(() => setSubmitError(true));
+    } else {
+      setSubmitted(false);
     }
   };
 
-  render() {
-    const {
-      name,
-      email,
-      message,
-      nameError,
-      emailError,
-      messageError,
-      submitted,
-      fetchError
-    } = this.state;
-    const { title } = this.props;
-
-    return !fetchError ? (
-      <div id="contact">
-        <h2 className="text-center">{title}</h2>
-        <form id="contact-form" onSubmit={this.handleSubmit}>
-          <label htmlFor="name">
-            <div>
-              Name:
-              {nameError ? (
-                <span className="error-message">{nameError}</span>
-              ) : (
-                <span />
-              )}
-            </div>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label htmlFor="email">
-            <div>
-              E-Mail:
-              {emailError ? (
-                <span className="error-message">{emailError}</span>
-              ) : (
-                <span />
-              )}
-            </div>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-              aria-describedby="emailHelp"
-            />
-          </label>
-          <label htmlFor="message">
-            <div>
-              Message:
-              {messageError ? (
-                <span className="error-message">{messageError}</span>
-              ) : (
-                <span />
-              )}
-            </div>
-            <textarea
-              type="textarea"
-              name="message"
-              value={message}
-              onChange={this.handleChange}
-            />
-          </label>
-          <div id="errors">{this.submitError}</div>
-          {submitted ? (
-            <div className="success">Submitted Successfully</div>
-          ) : (
-            <button type="submit" className="button primary-button">
-              Submit
-            </button>
-          )}
-        </form>
-      </div>
-    ) : (
-      <div id="contact">
-        <h2 className="text-center">Error</h2>
-        <p>
-          Sorry, there was an error sending your request. Please refresh the
-          page and try again.
-        </p>
-      </div>
-    );
-  }
-}
-
-// Default Prop Type Validation - Strings Only
+  return !submitError ? (
+    <div id="contact">
+      <h2 className="text-center">{title}</h2>
+      <form id="contact-form" onSubmit={handleSubmit}>
+        <label htmlFor="name">
+          <div>
+            Name:
+            {nameError ? (
+              <span className="error-message">{nameError}</span>
+            ) : (
+              <span />
+            )}
+          </div>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={event => setName(event.target.value)}
+            className={nameError ? "error-border" : " "}
+          />
+        </label>
+        <label htmlFor="email">
+          <div>
+            E-Mail:
+            {emailError ? (
+              <span className="error-message">{emailError}</span>
+            ) : (
+              <span />
+            )}
+          </div>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={event => setEmail(event.target.value)}
+            className={emailError ? "error-border" : " "}
+            aria-describedby="emailHelp"
+          />
+        </label>
+        <label htmlFor="message">
+          <div>
+            Message:
+            {messageError ? (
+              <span className="error-message">{messageError}</span>
+            ) : (
+              <span />
+            )}
+          </div>
+          <textarea
+            type="textarea"
+            name="message"
+            value={message}
+            onChange={event => setMessage(event.target.value)}
+            className={messageError ? "error-border" : " "}
+          />
+        </label>
+        {submitted ? (
+          <div className="success">Submitted Successfully</div>
+        ) : (
+          <button type="submit" className="button primary-button">
+            Submit
+          </button>
+        )}
+      </form>
+    </div>
+  ) : (
+    <div id="contact">
+      <h2 className="text-center">Error</h2>
+      <p>
+        Sorry, there was an error sending your request. Please refresh the page
+        and try again.
+      </p>
+    </div>
+  );
+};
 
 Contact.propTypes = {
   title: PropTypes.string
@@ -169,3 +138,5 @@ Contact.propTypes = {
 Contact.defaultProps = {
   title: "Contact"
 };
+
+export default Contact;
