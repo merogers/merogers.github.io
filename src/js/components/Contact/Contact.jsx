@@ -60,6 +60,8 @@ const Contact = ({ title }) => {
         id="contact-form"
         name="contact-form"
         method="post"
+        netlify
+        data-netlify="true"
         data-netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
       >
