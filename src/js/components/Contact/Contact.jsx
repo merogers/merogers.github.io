@@ -27,13 +27,10 @@ const Contact = ({ title }) => {
     return true;
   };
 
-  const encode = data => {
-    return Object.keys(data)
-      .map(
-        key => `${encodeURIComponent(key)} = ${encodeURIComponent(data[key])}`
-      )
-      .join("&");
-  };
+  const encode = data =>
+    Object.keys(data)
+      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&');
 
   const handleSubmit = event => {
     const isInputValid = validateInput();
@@ -60,7 +57,6 @@ const Contact = ({ title }) => {
         id="contact-form"
         name="contact-form"
         method="post"
-        netlify
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
